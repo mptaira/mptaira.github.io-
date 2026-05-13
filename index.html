@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BA Portfolio – [Your Name]</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --ink: #0f0e0b;
+    --cream: #f5f0e8;
+    --gold: #c9a84c;
+    --gold-light: #e8d5a0;
+    --rust: #b85c38;
+    --sage: #4a6741;
+    --mid: #6b6560;
+    --card-bg: #faf7f2;
+    --border: #ddd8cc;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(245,240,232,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'DM Mono', monospace;
+    font-size: .8rem; letter-spacing: .15em;
+    color: var(--gold); text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 2.5rem; }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: .75rem; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--mid); text-decoration: none;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 70% 50%, rgba(201,168,76,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-text {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 6rem 4rem 6rem 6rem;
+  }
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: .72rem; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: .75rem;
+  }
+  .hero-tag::before {
+    content: ''; display: block;
+    width: 2.5rem; height: 1px; background: var(--gold);
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    font-weight: 900; line-height: 1.05;
+    margin-bottom: 1.5rem;
+  }
+  h1 span { color: var(--gold); font-style: italic; }
+  .hero-sub {
+    font-size: 1.05rem; color: var(--mid); line-height: 1.7;
+    max-width: 38ch; margin-bottom: 2.5rem;
+  }
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-block;
+    padding: .85rem 2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: .78rem; letter-spacing: .1em; text-transform: uppercase;
+    text-decoration: none; border: 1.5px solid;
+    transition: all .25s; cursor: pointer;
+  }
+  .btn-primary {
+    background: var(--ink); color: var(--cream);
+    border-color: var(--ink);
+  }
+  .btn-primary:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+  .btn-outline {
+    background: transparent; color: var(--ink);
+    border-color: var(--ink);
+  }
+  .btn-outline:hover { background: var(--ink); color: var(--cream); }
+
+  .hero-visual {
+    display: flex; align-items: center; justify-content: center;
+    padding: 4rem 4rem 4rem 0;
+    position: relative;
+  }
+  .hero-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 2.5rem;
+    width: 100%; max-width: 380px;
+    position: relative;
+    box-shadow: 8px 8px 0 var(--gold-light);
+  }
+  .hero-card::before {
+    content: 'PROFILE';
+    font-family: 'DM Mono', monospace;
+    font-size: .65rem; letter-spacing: .2em;
+    color: var(--gold);
+    display: block; margin-bottom: 1.5rem;
+  }
+  .stat-row {
+    display: flex; justify-content: space-between;
+    padding: 1rem 0; border-bottom: 1px solid var(--border);
+  }
+  .stat-row:last-child { border-bottom: none; }
+  .stat-label {
+    font-family: 'DM Mono', monospace; font-size: .72rem;
+    letter-spacing: .08em; color: var(--mid); text-transform: uppercase;
+  }
+  .stat-val {
+    font-family: 'Playfair Display', serif; font-size: 1.1rem;
+    font-weight: 700; color: var(--ink);
+  }
+  .stat-val.gold { color: var(--gold); }
+
+  /* ── SECTIONS ── */
+  section { padding: 7rem 6rem; }
+  section + section { border-top: 1px solid var(--border); }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: .72rem; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: .75rem;
+  }
+  .section-label::before {
+    content: ''; width: 2rem; height: 1px; background: var(--gold);
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 700; line-height: 1.15; margin-bottom: 3rem;
+  }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .skill-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    padding: 2rem; position: relative; overflow: hidden;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .skill-card:hover { transform: translateY(-3px); box-shadow: 4px 8px 0 var(--gold-light); }
+  .skill-card::after {
+    content: attr(data-icon);
+    position: absolute; right: 1.5rem; bottom: 1rem;
+    font-size: 2.5rem; opacity: .12;
+  }
+  .skill-card h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.1rem;
+    font-weight: 700; margin-bottom: .75rem;
+  }
+  .skill-card p { font-size: .88rem; color: var(--mid); line-height: 1.6; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1rem; }
+  .tag {
+    font-family: 'DM Mono', monospace; font-size: .68rem;
+    letter-spacing: .06em; padding: .25rem .65rem;
+    background: var(--cream); border: 1px solid var(--border);
+    color: var(--mid);
+  }
+  .tag.gold { background: rgba(201,168,76,.1); border-color: var(--gold); color: var(--gold); }
+
+  /* ── PROJECTS ── */
+  .projects-grid {
+    display: grid; gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    padding: 2.5rem;
+    display: grid; grid-template-columns: auto 1fr auto;
+    gap: 2rem; align-items: start;
+    transition: border-color .2s, box-shadow .2s;
+    position: relative; overflow: hidden;
+  }
+  .project-card:hover { border-color: var(--gold); box-shadow: 4px 4px 0 var(--gold-light); }
+  .project-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem; font-weight: 900;
+    color: var(--border); line-height: 1;
+    user-select: none; min-width: 2.5rem;
+  }
+  .project-body h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.35rem;
+    font-weight: 700; margin-bottom: .5rem;
+  }
+  .project-meta {
+    font-family: 'DM Mono', monospace; font-size: .7rem;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: .75rem;
+  }
+  .project-body p { font-size: .9rem; color: var(--mid); line-height: 1.7; margin-bottom: 1rem; }
+  .deliverables { display: flex; flex-wrap: wrap; gap: .4rem; }
+  .project-links { display: flex; flex-direction: column; gap: .5rem; }
+  .project-link {
+    font-family: 'DM Mono', monospace; font-size: .72rem;
+    letter-spacing: .08em; text-transform: uppercase;
+    color: var(--mid); text-decoration: none;
+    padding: .5rem 1rem; border: 1px solid var(--border);
+    transition: all .2s; white-space: nowrap;
+    text-align: center;
+  }
+  .project-link:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+
+  /* ── TOOLS ── */
+  .tools-list {
+    display: flex; flex-wrap: wrap; gap: 1rem;
+  }
+  .tool-pill {
+    display: flex; align-items: center; gap: .6rem;
+    padding: .75rem 1.5rem;
+    background: var(--card-bg); border: 1px solid var(--border);
+    font-family: 'DM Mono', monospace; font-size: .8rem;
+    transition: all .2s;
+  }
+  .tool-pill:hover { border-color: var(--gold); color: var(--gold); }
+  .tool-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+
+  /* ── CONTACT ── */
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  }
+  .contact-text h2 { margin-bottom: 1rem; }
+  .contact-text p { color: var(--mid); font-size: 1rem; line-height: 1.7; margin-bottom: 2rem; }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 1.5rem;
+    background: var(--card-bg); border: 1px solid var(--border);
+    text-decoration: none; color: var(--ink);
+    font-family: 'DM Mono', monospace; font-size: .8rem;
+    letter-spacing: .06em; text-transform: uppercase;
+    transition: all .2s;
+  }
+  .contact-link:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+  .contact-link span { opacity: .5; font-size: .7rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2.5rem 6rem;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'DM Mono', monospace; font-size: .72rem;
+    letter-spacing: .06em; color: var(--mid);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-text > * {
+    opacity: 0;
+    animation: fadeUp .7s ease forwards;
+  }
+  .hero-tag    { animation-delay: .1s; }
+  h1           { animation-delay: .25s; }
+  .hero-sub    { animation-delay: .4s; }
+  .hero-cta    { animation-delay: .55s; }
+  .hero-card   { opacity: 0; animation: fadeUp .7s .6s ease forwards; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 2rem; }
+    .nav-links { gap: 1.5rem; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-text { padding: 4rem 2rem 2rem; }
+    .hero-visual { padding: 2rem; }
+    section { padding: 5rem 2rem; }
+    .project-card { grid-template-columns: 1fr; }
+    .project-num { font-size: 2rem; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">BA Portfolio</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="about">
+  <div class="hero-text">
+    <div class="hero-tag">Business Analyst</div>
+    <h1>Turning Data<br>into <span>Decisions</span></h1>
+    <p class="hero-sub">
+      I bridge the gap between business needs and technical solutions — through requirements gathering, process analysis, and data-driven insight.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="https://github.com/yourusername" class="btn btn-outline" target="_blank">GitHub →</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div class="stat-row">
+        <span class="stat-label">Focus Area</span>
+        <span class="stat-val">Business Analysis</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Projects</span>
+        <span class="stat-val gold">5 Case Studies</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Tools</span>
+        <span class="stat-val">SQL · Excel · Tableau</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Status</span>
+        <span class="stat-val gold">Open to Roles</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Location</span>
+        <span class="stat-val">Your City, Country</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Core Competencies</div>
+  <h2>What I Bring<br>to the Table</h2>
+  <div class="skills-grid">
+    <div class="skill-card" data-icon="📋">
+      <h3>Requirements Elicitation</h3>
+      <p>Conducting stakeholder interviews, workshops, and surveys to capture business needs accurately.</p>
+      <div class="skill-tags">
+        <span class="tag gold">BRD</span>
+        <span class="tag">User Stories</span>
+        <span class="tag">Use Cases</span>
+        <span class="tag">UAT</span>
+      </div>
+    </div>
+    <div class="skill-card" data-icon="📊">
+      <h3>Data Analysis</h3>
+      <p>Querying, cleaning, and visualizing data to surface trends and support business decisions.</p>
+      <div class="skill-tags">
+        <span class="tag gold">SQL</span>
+        <span class="tag">Excel</span>
+        <span class="tag">Tableau</span>
+        <span class="tag">Power BI</span>
+      </div>
+    </div>
+    <div class="skill-card" data-icon="🔁">
+      <h3>Process Modeling</h3>
+      <p>Mapping current-state and future-state workflows using BPMN to identify inefficiencies and improvements.</p>
+      <div class="skill-tags">
+        <span class="tag gold">BPMN</span>
+        <span class="tag">Lucidchart</span>
+        <span class="tag">Visio</span>
+        <span class="tag">Swim Lanes</span>
+      </div>
+    </div>
+    <div class="skill-card" data-icon="🎯">
+      <h3>Agile & Scrum</h3>
+      <p>Collaborating with development teams in sprints, managing backlogs, and writing acceptance criteria.</p>
+      <div class="skill-tags">
+        <span class="tag gold">Jira</span>
+        <span class="tag">Confluence</span>
+        <span class="tag">Backlog</span>
+        <span class="tag">Sprints</span>
+      </div>
+    </div>
+    <div class="skill-card" data-icon="📈">
+      <h3>KPI & Reporting</h3>
+      <p>Defining success metrics, building dashboards, and delivering executive-ready reports.</p>
+      <div class="skill-tags">
+        <span class="tag gold">KPI Design</span>
+        <span class="tag">Dashboards</span>
+        <span class="tag">Storytelling</span>
+      </div>
+    </div>
+    <div class="skill-card" data-icon="🧩">
+      <h3>Stakeholder Management</h3>
+      <p>Aligning cross-functional teams, managing expectations, and facilitating decision-making sessions.</p>
+      <div class="skill-tags">
+        <span class="tag gold">Gap Analysis</span>
+        <span class="tag">RACI</span>
+        <span class="tag">Presentations</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Portfolio</div>
+  <h2>Sample Projects &<br>Case Studies</h2>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-num">01</div>
+      <div class="project-body">
+        <div class="project-meta">Data Analysis · SQL · Tableau</div>
+        <h3>Retail Sales Performance Dashboard</h3>
+        <p>
+          Analyzed 12 months of sales data from a fictional retail chain to identify underperforming regions, seasonal trends, and product category insights. Built an interactive Tableau dashboard with KPI cards, trend lines, and regional heat maps for executive review.
+        </p>
+        <div class="deliverables">
+          <span class="tag gold">SQL Queries</span>
+          <span class="tag">Tableau Dashboard</span>
+          <span class="tag">Executive Summary</span>
+          <span class="tag">Data Dictionary</span>
+        </div>
+      </div>
+      <div class="project-links">
+        <a href="#" class="project-link">GitHub</a>
+        <a href="#" class="project-link">Live Demo</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">02</div>
+      <div class="project-body">
+        <div class="project-meta">Process Analysis · BPMN · Gap Analysis</div>
+        <h3>Employee Onboarding Process Redesign</h3>
+        <p>
+          Mapped the current-state onboarding process of a fictional mid-size company, identifying 6 bottlenecks causing a 3-week average delay. Produced a future-state BPMN diagram, gap analysis, and a business case recommending an HRIS automation tool.
+        </p>
+        <div class="deliverables">
+          <span class="tag gold">As-Is / To-Be BPMN</span>
+          <span class="tag">Gap Analysis</span>
+          <span class="tag">Business Case</span>
+          <span class="tag">Stakeholder Map</span>
+        </div>
+      </div>
+      <div class="project-links">
+        <a href="#" class="project-link">GitHub</a>
+        <a href="#" class="project-link">PDF Report</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">03</div>
+      <div class="project-body">
+        <div class="project-meta">Agile · Requirements · User Stories</div>
+        <h3>E-Commerce Checkout Redesign (Agile BA)</h3>
+        <p>
+          Acted as BA for a simulated Agile project to redesign a checkout flow. Wrote a Business Requirements Document (BRD), broke requirements into epics and user stories, defined acceptance criteria, and created a UAT test plan. Prioritized backlog using MoSCoW method.
+        </p>
+        <div class="deliverables">
+          <span class="tag gold">BRD</span>
+          <span class="tag">User Stories</span>
+          <span class="tag">UAT Plan</span>
+          <span class="tag">MoSCoW Backlog</span>
+        </div>
+      </div>
+      <div class="project-links">
+        <a href="#" class="project-link">GitHub</a>
+        <a href="#" class="project-link">Docs</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">04</div>
+      <div class="project-body">
+        <div class="project-meta">Excel · Financial Modeling · KPI</div>
+        <h3>Budget Variance Analysis — Ops Department</h3>
+        <p>
+          Modeled a 12-month operational budget for a fictional 200-person company. Identified a 14% over-spend in logistics using Excel pivot tables and variance analysis. Delivered a PowerPoint presentation to mock C-suite with actionable recommendations.
+        </p>
+        <div class="deliverables">
+          <span class="tag gold">Excel Model</span>
+          <span class="tag">Variance Report</span>
+          <span class="tag">Pivot Tables</span>
+          <span class="tag">Exec Presentation</span>
+        </div>
+      </div>
+      <div class="project-links">
+        <a href="#" class="project-link">GitHub</a>
+        <a href="#" class="project-link">Slides</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">05</div>
+      <div class="project-body">
+        <div class="project-meta">CRM · Stakeholder Analysis · Roadmap</div>
+        <h3>CRM System Selection & Business Case</h3>
+        <p>
+          Conducted a vendor evaluation for a fictional company choosing between Salesforce, HubSpot, and Zoho. Gathered requirements via mock stakeholder interviews, scored vendors against a weighted criteria matrix, and delivered a formal business case recommending the optimal solution with 3-year ROI projection.
+        </p>
+        <div class="deliverables">
+          <span class="tag gold">Requirements Matrix</span>
+          <span class="tag">Vendor Scorecard</span>
+          <span class="tag">Business Case</span>
+          <span class="tag">ROI Model</span>
+        </div>
+      </div>
+      <div class="project-links">
+        <a href="#" class="project-link">GitHub</a>
+        <a href="#" class="project-link">Report</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section>
+  <div class="section-label">Toolbox</div>
+  <h2>Tools & Technologies</h2>
+  <div class="tools-list">
+    <div class="tool-pill"><span class="tool-dot"></span>SQL (PostgreSQL)</div>
+    <div class="tool-pill"><span class="tool-dot"></span>Microsoft Excel</div>
+    <div class="tool-pill"><span class="tool-dot"></span>Tableau</div>
+    <div class="tool-pill"><span class="tool-dot"></span>Power BI</div>
+    <div class="tool-pill"><span class="tool-dot"></span>Jira</div>
+    <div class="tool-pill"><span class="tool-dot"></span>Confluence</div>
+    <div class="tool-pill"><span class="tool-dot"></span>Lucidchart</div>
+    <div class="tool-pill"><span class="tool-dot"></span>Microsoft Visio</div>
+    <div class="tool-pill"><span class="tool-dot"></span>PowerPoint</div>
+    <div class="tool-pill"><span class="tool-dot"></span>Google Sheets</div>
+    <div class="tool-pill"><span class="tool-dot"></span>Miro</div>
+    <div class="tool-pill"><span class="tool-dot"></span>Python (basic)</div>
+    <div class="tool-pill"><span class="tool-dot"></span>BPMN 2.0</div>
+    <div class="tool-pill"><span class="tool-dot"></span>Agile / Scrum</div>
+    <div class="tool-pill"><span class="tool-dot"></span>BABOK Framework</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="contact-text">
+      <div class="section-label">Get In Touch</div>
+      <h2>Open to New<br>Opportunities</h2>
+      <p>
+        I'm actively seeking Business Analyst roles where I can contribute data-driven thinking and sharp communication skills to help teams make better decisions.
+      </p>
+      <a href="resume.pdf" class="btn btn-primary" download>Download Resume</a>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:you@email.com" class="contact-link">
+        Email <span>you@email.com →</span>
+      </a>
+      <a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-link">
+        LinkedIn <span>linkedin.com/in/you →</span>
+      </a>
+      <a href="https://github.com/yourusername" target="_blank" class="contact-link">
+        GitHub <span>github.com/you →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>© 2026 Your Name — Business Analyst Portfolio</div>
+  <div>Built with purpose · Hosted on GitHub Pages</div>
+</footer>
+
+</body>
+</html>
